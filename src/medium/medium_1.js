@@ -1,4 +1,4 @@
-import {variance} from "./data/stats_helpers.js";
+import { variance } from "./data/stats_helpers.js";
 
 /**
  * Gets the sum of an array of numbers.
@@ -8,9 +8,14 @@ import {variance} from "./data/stats_helpers.js";
  * prototype functions. Very useful
  */
 export function getSum(array) {
-
+  var sum = 0;
+  for (let i = 0; i < array.length; i++) {
+    sum += array[i];
+  }
+  return sum;
 }
 
+let nums = [3, 2, 5, 6, 2, 7, 4, 2, 7, 5];
 
 /**
  * Calculates the median of an array of numbers.
@@ -22,7 +27,21 @@ export function getSum(array) {
  * console.log(getMedian(array)); // 4.5
  */
 export function getMedian(array) {
+  var hold = 0;
+  for (let i = 0; i < array.length; i++) {
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[i] > array[j]) {
+        hold = array[i];
+        array[i] = array[j];
+        array[j] = hold;
+      }
+    }
+  }
 
+  if (array.length % 2 != 0) {
+    return array[array.length / 2 - 0.5];
+  }
+  return (array[array.length / 2] + array[array.length / 2 - 1]) / 2;
 }
 
 /**
@@ -45,6 +64,58 @@ export function getMedian(array) {
  }
  */
 export function getStatistics(array) {
-
+  return {
+    length: getLength(array),
+    sum: getSum(array),
+    mean: getMean(array),
+    median: getMedian(array),
+    min: getMin(array),
+    max: getMax(array),
+    variance: getVariance(array, getMean(array)),
+    standard_deviation: getStandard(array, getMean(array)),
+  };
 }
 
+export function getLength(array) {
+  return array.length;
+}
+
+export function getMean(array) {
+  return getSum(array) / getLength(array);
+}
+export function getMax(array) {
+  var max = array[0];
+  for (let i = 0; i < array.length; i++) {
+    if (max < array[i]) {
+      max = array[i];
+    }
+  }
+  return max;
+}
+
+export function getMin(array) {
+  var min = array[0];
+  for (let i = 0; i < array.length; i++) {
+    if (min > array[i]) {
+      min = array[i];
+    }
+  }
+  return min;
+}
+
+export function getVariance(array, mean) {
+  return (
+    array
+      .map(function (sample) {
+        return Math.pow(mean - sample, 2);
+      })
+      .reduce(function sum(m, v) {
+        m += v;
+        return m;
+      }, 0) / array.length
+  );
+}
+
+export function getStandard(array, mean) {
+  return Math.sqrt(getVariance(array, mean));
+}

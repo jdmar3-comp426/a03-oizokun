@@ -24,8 +24,17 @@ console.log(sumToString(1, 5));
  * returns: [ 3, 4, 5, 6, 7 ]
  *
  */
-export function getIncreasingArray(startNumber, endNumber) {}
+export function getIncreasingArray(startNumber, endNumber) {
+  var size = endNumber - startNumber + 1;
+  var array = new Array(size);
+  for (let i = 0; i < size; i++) {
+    array[i] = startNumber;
+    startNumber++;
+  }
+  return array;
+}
 
+console.log(getIncreasingArray(3, 7));
 /**
  *
  * @param {number[]} numbers
@@ -33,7 +42,22 @@ export function getIncreasingArray(startNumber, endNumber) {}
  * see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
  * and https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math
  */
-export function maxAndMin(numbers) {}
+export function maxAndMin(numbers) {
+  var array = new Array(2);
+  var min = numbers[0];
+  var max = numbers[0];
+  for (let i = 0; i < numbers.length; i++) {
+    if (min > numbers[i]) {
+      min = numbers[i];
+    } else if (max < numbers[i]) {
+      max = numbers[i];
+    }
+  }
+  array[0] = min;
+  array[1] = max;
+  return array;
+}
+console.log(maxAndMin([1, 2, 200, 4, 6, 10, 0]));
 
 /**
  *
@@ -45,4 +69,15 @@ export function maxAndMin(numbers) {}
  * returns: {'2': 2, '3': 3, '6': 1, some: 2, hello: 1, '1,2': 1}
  *
  */
-export function countArray(array) {}
+export function countArray(array) {
+  var counter = {};
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] in counter) {
+      counter[array[i]]++;
+    } else {
+      counter[array[i]] = 1;
+    }
+  }
+  return counter;
+}
+console.log(countArray([3, 6, 3, 2, 2, 3, "some", "hello", "some", [1, 2]]));
