@@ -10,7 +10,7 @@
  */
 export function sumToString(a, b) {
   var c = a + b;
-  return "'" + a + " + " + b + " = " + c + "'";
+  return "" + a + " + " + b + " = " + c + "";
 }
 
 /**
@@ -51,9 +51,7 @@ export function maxAndMin(numbers) {
       max = numbers[i];
     }
   }
-  array[0] = min;
-  array[1] = max;
-  return array;
+  return { max: max, min: min };
 }
 
 /**
