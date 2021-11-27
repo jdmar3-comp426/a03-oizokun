@@ -12,7 +12,6 @@ export function sumToString(a, b) {
   var c = a + b;
   return "'" + a + " + " + b + " = " + c + "'";
 }
-console.log(sumToString(1, 5));
 
 /**
  *
@@ -34,7 +33,6 @@ export function getIncreasingArray(startNumber, endNumber) {
   return array;
 }
 
-console.log(getIncreasingArray(3, 7));
 /**
  *
  * @param {number[]} numbers
@@ -57,7 +55,6 @@ export function maxAndMin(numbers) {
   array[1] = max;
   return array;
 }
-console.log(maxAndMin([1, 2, 200, 4, 6, 10, 0]));
 
 /**
  *
@@ -80,4 +77,3 @@ export function countArray(array) {
   }
   return counter;
 }
-console.log(countArray([3, 6, 3, 2, 2, 3, "some", "hello", "some", [1, 2]]));
