@@ -30,7 +30,6 @@ export const repeatDemo = () => {
   repeat((fn) => console.log(fn), 10, "Hello, world!");
 };
 
-console.log(repeatDemo());
 /**************************************************************************
  *
  * Function currying
@@ -44,19 +43,24 @@ console.log(repeatDemo());
  *   parameter "num2". The returned function should calculate and return the
  *   product of num1 and num2.
  */
-export const multiplyBy = (num1) => {};
+export const multiplyBy = (num1) => {
+  const mult = (num2) => num2 * num1;
+  return mult;
+};
 
 /**
  * Use the multiplyBy function to create and export a function named
  *   "tenTimes" that multiplies a number by 10.
  */
-export const tenTimes = undefined;
+export const tenTimes = multiplyBy(10);
 
 /**
  * Write and export a function named "tenTimesFifty" which uses the tenTimes
  *   function to multiply 50 by 10 and returns the result.
  */
-export const tenTimesFifty = () => {};
+export const tenTimesFifty = () => {
+  return 50 * tenTimes();
+};
 
 /**************************************************************************
  *
@@ -81,7 +85,16 @@ export const tenTimesFifty = () => {};
  *    everyEven([1, 5, 1, 0, 1], x => x === 1)  <--  returns true
  *    everyEven([1, 1, 0, 1, 1], x => x === 1)  <--  returns false
  */
-export const everyEven = (arr, test) => {};
+export const everyEven = (arr, test) => {
+  for (let i = 0; i <= arr.length; i++) {
+    if (i % 2 === 0) {
+      if (!test(arr[i])) {
+        return false;
+      }
+    }
+  }
+  return true;
+};
 
 /**
  * Write and export a function named "someEven" which takes an array and a test
@@ -102,7 +115,16 @@ export const everyEven = (arr, test) => {};
  *    someEven([1, 1, 1, 1, 0], x => x === 0)  <--  returns true
  *    someEven([0, 0, 0, 0, 0], x => x === 0)  <--  returns true
  */
-export const someEven = (arr, test) => {};
+export const someEven = (arr, test) => {
+  for (let i = 0; i <= arr.length; i++) {
+    if (i % 2 === 0) {
+      if (test(arr[i])) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
 
 /**
  * Write and export a function named "filter" which takes an array and a test
@@ -125,21 +147,43 @@ export const someEven = (arr, test) => {};
  *    filter([1, 90, 5, 31], x => x % 2 === 1)
  *       -->  { pass: [1, 5, 31], fail: [90] }
  */
-export const filter = (arr, test) => {};
+export const filter = (arr, test) => {
+  var pass = {};
+  var fail = {};
+  var psize = 0;
+  var fsize = 0;
+  for (let i = 0; i <= arr.length; i++) {
+    if (test(arr[i])) {
+      pass[pass] += [arr[i]];
+      psize++;
+      return pass;
+    } else {
+      fail[psize] = { fail: arr[i] };
+      fsize++;
+    }
+  }
+  return pass + fail;
+};
 
 /**
  * Write and export a function named "allEvensAreOdd" which takes as input an
  *   array and returns true only if all of the even elements in the array are
  *   odd numbers. Use the "everyEven" function in this function.
  */
-export const allEvensAreOdd = (arr) => {};
+export const allEvensAreOdd = (arr) => {
+  return everyEven(arr, (x) => x % 2 != 0);
+};
+
+console.log(allEvensAreOdd([1, 5, 1, 0, 0], (x) => x === 1));
 
 /**
  * Write and export a function named "anEvenIsOdd" which takes as input an
  *   array and returns true if at least one of the even-indexed elements in the
  *   array is an odd number. Use the "someEven" function in this function.
  */
-export const anEvenIsOdd = (arr) => {};
+export const anEvenIsOdd = (arr) => {
+  return someEven(arr, (x) => x % 2 != 0);
+};
 
 /**
  * Write and export a function named "hasExactly" which takes an array, a test
@@ -147,4 +191,15 @@ export const anEvenIsOdd = (arr) => {};
  *   The "hasExactly" function should return true only if exactly n elements
  *   pass the test. You must use the filter function.
  */
-export const hasExactly = (arr, test, n) => {};
+export const hasExactly = (arr, test, n) => {
+  var counter = 0;
+  for (let i = 0; i <= arr.length; i++) {
+    if (filter(arr[i], test)) {
+      counter++;
+    }
+  }
+  if (counter === n) {
+    return true;
+  }
+  return false;
+};
