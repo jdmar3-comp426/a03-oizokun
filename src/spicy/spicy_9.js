@@ -151,21 +151,19 @@ export const someEven = (arr, test) => {
  *       -->  { pass: [1, 5, 31], fail: [90] }
  */
 export const filter = (arr, test) => {
-  var pass = {};
-  var fail = {};
-  var psize = 0;
-  var fsize = 0;
-  for (let i = 0; i <= arr.length; i++) {
-    if (test(arr[i])) {
-      pass[pass] += [arr[i]];
-      psize++;
-      return pass;
+  var passArray = new Array();
+  var failArray = new Array();
+  for (let i = 0; i < arr.length; i++) {
+    if (test(arr[i]) === true) {
+      passArray.push(arr[i]);
     } else {
-      fail[psize] = { fail: arr[i] };
-      fsize++;
+      failArray.push(arr[i]);
     }
   }
-  return pass + fail;
+  return {
+    pass: passArray,
+    fail: failArray,
+  };
 };
 
 /**
