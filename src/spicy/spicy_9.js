@@ -177,7 +177,7 @@ export const allEvensAreOdd = (arr) => {
   return everyEven(arr, (x) => x % 2 != 0);
 };
 
-console.log(allEvensAreOdd([1, 5, 1, 0, 0], (x) => x === 1));
+
 
 /**
  * Write and export a function named "anEvenIsOdd" which takes as input an
