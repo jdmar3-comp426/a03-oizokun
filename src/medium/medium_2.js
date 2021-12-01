@@ -24,6 +24,7 @@ export const allCarStats = {
   ratioHybrids: getHybrid(),
 };
 
+// console.log(allCarStats);
 export function getAvg() {
   var city = 0;
   var highway = 0;
@@ -117,31 +118,31 @@ export default {
   avgMpgByYearAndHybrid: undefined,
 };
 
-console.log(getMakers());
+// console.log(getMakers());
 
-export function getMakers() {
-  var array = new Array();
-  var size = 0;
-  for (let i = 0; i < mpg_data.length; i++) {
-    if (mpg_data[i].hybrid == true) {
-      array[size] = { make: mpg_data[i].make, hybrids: mpg_data[i].id };
-      size++;
-    }
-  }
+// export function getMakers() {
+//   var array = new Array();
+//   var size = 0;
+//   for (let i = 0; i < mpg_data.length; i++) {
+//     if (mpg_data[i].hybrid == true) {
+//       array[size] = { make: mpg_data[i].make, hybrids: mpg_data[i].id };
+//       size++;
+//     }
+//   }
 
-  var counter = new Array();
-  for (let i = 0; i < array.length; i++) {
-    if (array[i].make in counter) {
-      counter[array[i].make] = {
-        make: array[i].make,
-        hybrids: array[i].hybrids,
-      };
-    } else {
-      counter[array[i].make] = {
-        make: array[i].make,
-        hybrids: array[i].hybrids,
-      };
-    }
-  }
-  return counter;
-}
+//   var counter = new Array();
+//   for (let i = 0; i < array.length; i++) {
+//     if (array[i].make in counter) {
+//       counter[array[i].make] = {
+//         make: array[i].make,
+//         hybrids: array[i].hybrids,
+//       };
+//     } else {
+//       counter[array[i].make] = {
+//         make: array[i].make,
+//         hybrids: array[i].hybrids,
+//       };
+//     }
+//   }
+//   return counter;
+// }

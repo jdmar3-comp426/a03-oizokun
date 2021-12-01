@@ -54,7 +54,7 @@ export function maxAndMin(numbers) {
   const finalmin = min;
   return { max: finalmax, min: finalmin };
 }
-console.log(typeof maxAndMin([1, 2]).max);
+
 /**
  *
  * @param array - An array of any primitive type

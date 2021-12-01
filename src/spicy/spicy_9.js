@@ -30,7 +30,6 @@ export const repeatDemo = () => {
   repeat((fn) => console.log(fn), 10, "Hello, world!");
 };
 
-repeatDemo();
 /**************************************************************************
  *
  * Function currying
