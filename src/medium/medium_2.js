@@ -24,16 +24,16 @@ export const allCarStats = {
   ratioHybrids: getHybrid(),
 };
 
-// console.log(allCarStats);
-
 export function getAvg() {
-  var miles = 0;
+  var city = 0;
+  var highway = 0;
   for (let i = 0; i < mpg_data.length; i++) {
-    miles += mpg_data[i].city_mpg + mpg_data[i].highway_mpg;
+    city += mpg_data[i].city_mpg;
+    highway += mpg_data[i].highway_mpg;
   }
-  miles = miles / mpg_data.length;
-  miles = miles / 2;
-  return miles;
+  city = city / mpg_data.length;
+  highway = highway / mpg_data.length;
+  return { city: city, highway: highway };
 }
 
 export function allYear() {

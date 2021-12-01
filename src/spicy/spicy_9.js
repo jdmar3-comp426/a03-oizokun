@@ -17,7 +17,7 @@
 export const repeat = (fn, n, ...params) => {
   var final = new Array();
   for (let i = 0; i < n; i++) {
-    final[i] = fn(params);
+    final[i] = fn(...params);
   }
   return final;
 };
@@ -30,6 +30,7 @@ export const repeatDemo = () => {
   repeat((fn) => console.log(fn), 10, "Hello, world!");
 };
 
+repeatDemo();
 /**************************************************************************
  *
  * Function currying
@@ -44,7 +45,10 @@ export const repeatDemo = () => {
  *   product of num1 and num2.
  */
 export const multiplyBy = (num1) => {
-  const mult = (num2) => num2 * num1;
+  function mult(num2) {
+    return num2 * num1;
+  }
+
   return mult;
 };
 
