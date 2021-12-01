@@ -62,7 +62,7 @@ export const tenTimes = multiplyBy(10);
  *   function to multiply 50 by 10 and returns the result.
  */
 export const tenTimesFifty = () => {
-  return 50 * tenTimes();
+  return tenTimes(50);
 };
 
 /**************************************************************************
@@ -176,8 +176,6 @@ export const filter = (arr, test) => {
 export const allEvensAreOdd = (arr) => {
   return everyEven(arr, (x) => x % 2 != 0);
 };
-
-
 
 /**
  * Write and export a function named "anEvenIsOdd" which takes as input an

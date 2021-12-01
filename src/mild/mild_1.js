@@ -43,16 +43,14 @@ export function getIncreasingArray(startNumber, endNumber) {
 export function maxAndMin(numbers) {
   let min = numbers[0];
   let max = numbers[0];
-  for (let i = 0; i < numbers.length; i++) {
+  for (var i = 0; i < numbers.length; i++) {
     if (min > numbers[i]) {
       min = numbers[i];
     } else if (max < numbers[i]) {
       max = numbers[i];
     }
   }
-  const finalmax = max;
-  const finalmin = min;
-  return { max: finalmax, min: finalmin };
+  return { 'max': max, 'min': min };
 }
 
 /**
