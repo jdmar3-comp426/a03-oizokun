@@ -15,18 +15,20 @@
  *                from calling the function
  */
 export const repeat = (fn, n, ...params) => {
-
+  var final = new Array();
+  for (let i = 0; i < n; i++) {
+    final[i] = fn(...params);
+  }
+  return final;
 };
-
 
 /**
  * Use the repeat function to log the string "Hello, world!" to the console
  *   10 times.
  */
 export const repeatDemo = () => {
-
+  repeat((fn) => console.log(fn), 10, "Hello, world!");
 };
-
 
 /**************************************************************************
  *
@@ -36,30 +38,32 @@ export const repeatDemo = () => {
 
 /**
  * Write and export a function named "multiplyBy" which takes a single number
- *   parameter "num1" and returns a function that takes a different number
+ *   parameter "num1"=[
+ * ] and returns a function that takes a different number
  *   parameter "num2". The returned function should calculate and return the
  *   product of num1 and num2.
  */
 export const multiplyBy = (num1) => {
+  function mult(num2) {
+    return num2 * num1;
+  }
 
+  return mult;
 };
-
 
 /**
  * Use the multiplyBy function to create and export a function named
  *   "tenTimes" that multiplies a number by 10.
  */
-export const tenTimes = undefined;
-
+export const tenTimes = multiplyBy(10);
 
 /**
  * Write and export a function named "tenTimesFifty" which uses the tenTimes
  *   function to multiply 50 by 10 and returns the result.
  */
 export const tenTimesFifty = () => {
-
+  return tenTimes(50);
 };
-
 
 /**************************************************************************
  *
@@ -85,9 +89,15 @@ export const tenTimesFifty = () => {
  *    everyEven([1, 1, 0, 1, 1], x => x === 1)  <--  returns false
  */
 export const everyEven = (arr, test) => {
-
+  for (let i = 0; i <= arr.length; i++) {
+    if (i % 2 === 0) {
+      if (!test(arr[i])) {
+        return false;
+      }
+    }
+  }
+  return true;
 };
-
 
 /**
  * Write and export a function named "someEven" which takes an array and a test
@@ -109,9 +119,15 @@ export const everyEven = (arr, test) => {
  *    someEven([0, 0, 0, 0, 0], x => x === 0)  <--  returns true
  */
 export const someEven = (arr, test) => {
-
+  for (let i = 0; i <= arr.length; i++) {
+    if (i % 2 === 0) {
+      if (test(arr[i])) {
+        return true;
+      }
+    }
+  }
+  return false;
 };
-
 
 /**
  * Write and export a function named "filter" which takes an array and a test
@@ -135,9 +151,20 @@ export const someEven = (arr, test) => {
  *       -->  { pass: [1, 5, 31], fail: [90] }
  */
 export const filter = (arr, test) => {
-
+  var passArray = new Array();
+  var failArray = new Array();
+  for (let i = 0; i < arr.length; i++) {
+    if (test(arr[i]) === true) {
+      passArray.push(arr[i]);
+    } else {
+      failArray.push(arr[i]);
+    }
+  }
+  return {
+    pass: passArray,
+    fail: failArray,
+  };
 };
-
 
 /**
  * Write and export a function named "allEvensAreOdd" which takes as input an
@@ -145,9 +172,8 @@ export const filter = (arr, test) => {
  *   odd numbers. Use the "everyEven" function in this function.
  */
 export const allEvensAreOdd = (arr) => {
-
+  return everyEven(arr, (x) => x % 2 != 0);
 };
-
 
 /**
  * Write and export a function named "anEvenIsOdd" which takes as input an
@@ -155,9 +181,8 @@ export const allEvensAreOdd = (arr) => {
  *   array is an odd number. Use the "someEven" function in this function.
  */
 export const anEvenIsOdd = (arr) => {
-
+  return someEven(arr, (x) => x % 2 != 0);
 };
-
 
 /**
  * Write and export a function named "hasExactly" which takes an array, a test
@@ -166,5 +191,14 @@ export const anEvenIsOdd = (arr) => {
  *   pass the test. You must use the filter function.
  */
 export const hasExactly = (arr, test, n) => {
-
+  var counter = 0;
+  for (let i = 0; i <= arr.length; i++) {
+    if (filter(arr[i], test)) {
+      counter++;
+    }
+  }
+  if (counter === n) {
+    return true;
+  }
+  return false;
 };
